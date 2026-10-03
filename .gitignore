@@ -1,4 +1,4 @@
 node_modules/
-data/preferences.json
+data/restaurant.json
 .env
 *.log

@@ -3,6 +3,6 @@ npm-debug.log
 .git
 .github
 tests
-data/preferences.json
+data/restaurant.json
 .env
 .env.local

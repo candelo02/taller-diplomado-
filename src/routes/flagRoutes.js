@@ -3,9 +3,7 @@ const router = express.Router();
 const { featureFlagService } = require('../config/featureFlags');
 
 router.get('/feature-flags', (req, res) => {
-  const userIdentifier = req.headers['x-user-id'] || req.ip || 'anonymous';
-  const evaluation = featureFlagService.evaluateForUser(userIdentifier);
-  res.json(evaluation);
+  res.json(featureFlagService.evaluate());
 });
 
 router.post('/feature-flags', (req, res) => {

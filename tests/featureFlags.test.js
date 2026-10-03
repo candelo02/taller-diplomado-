@@ -2,31 +2,24 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { FeatureFlagService } = require('../src/config/featureFlags');
 
-test('FeatureFlagService - Ejemplo 3 (Modo Oscuro)', async (t) => {
-  await t.test('Ticket 1: dark_mode_enabled deshabilitado por defecto', () => {
-    const ff = new FeatureFlagService({ dark_mode_enabled: false, dark_mode_visible_percentage: 10 });
-    assert.equal(ff.isDarkModeSupported(), false);
-    assert.equal(ff.isDarkModeVisible('user_123'), false);
+test('FeatureFlagService - Restaurante Gourmet Flags', async (t) => {
+  await t.test('online_ordering_enabled activado por defecto', () => {
+    const ff = new FeatureFlagService({ online_ordering_enabled: true, table_reservation_enabled: true, promotions_banner_enabled: true });
+    assert.equal(ff.isOnlineOrderingEnabled(), true);
+    assert.equal(ff.isTableReservationEnabled(), true);
+    assert.equal(ff.isPromotionsBannerEnabled(), true);
   });
 
-  await t.test('Ticket 1: dark_mode_enabled habilitado explícitamente', () => {
-    const ff = new FeatureFlagService({ dark_mode_enabled: true, dark_mode_visible_percentage: 10 });
-    assert.equal(ff.isDarkModeSupported(), true);
+  await t.test('Permite desactivar flags individualmente', () => {
+    const ff = new FeatureFlagService({ online_ordering_enabled: false, table_reservation_enabled: true, promotions_banner_enabled: false });
+    assert.equal(ff.isOnlineOrderingEnabled(), false);
+    assert.equal(ff.isTableReservationEnabled(), true);
+    assert.equal(ff.isPromotionsBannerEnabled(), false);
   });
 
-  await t.test('Ticket 2: Rollout 100% permite ver el toggle a cualquier usuario', () => {
-    const ff = new FeatureFlagService({ dark_mode_enabled: true, dark_mode_visible_percentage: 100 });
-    assert.equal(ff.isDarkModeVisible('user_123'), true);
-    assert.equal(ff.isDarkModeVisible('user_999'), true);
-  });
-
-  await t.test('Ticket 2: Rollout 0% oculta el toggle a cualquier usuario', () => {
-    const ff = new FeatureFlagService({ dark_mode_enabled: true, dark_mode_visible_percentage: 0 });
-    assert.equal(ff.isDarkModeVisible('user_123'), false);
-  });
-
-  await t.test('Ticket 3: Persistencia inactiva si dark_mode_enabled es false', () => {
-    const ff = new FeatureFlagService({ dark_mode_enabled: false, dark_mode_persistence_enabled: true });
-    assert.equal(ff.isDarkModePersistenceEnabled(), false);
+  await t.test('setFlag actualiza dinámicamente el estado del flag', () => {
+    const ff = new FeatureFlagService();
+    ff.setFlag('online_ordering_enabled', false);
+    assert.equal(ff.isOnlineOrderingEnabled(), false);
   });
 });

@@ -1,16 +1,16 @@
-# 📖 Playbook de Trabajo: Modo Oscuro con Feature Flags (Ejemplo 3)
+# 📖 Playbook de Trabajo: Restaurante Gourmet "La Dolce Vita" (TBD & Feature Flags)
 
-Guía de desarrollo e integración continua para el equipo.
+Guía de desarrollo e integración continua para el equipo de desarrollo.
 
 ---
 
-## 🚩 Estrategia de División de Historias (Ejemplo 3)
+## 🔄 Flujo de Trabajo (Trunk-Based Development)
 
-- **Ticket 1 (CSS Variables & Engine)**:
-  - Definir variables CSS para temas claro y oscuro (`:root` y `[data-theme="dark"]`).
-  - Proteger detrás de `dark_mode_enabled = false`.
-- **Ticket 2 (Botón Switch & Rollout 10%)**:
-  - Exponer el botón switch únicamente al 10% de usuarios (`dark_mode_visible_percentage = 10`). Sin persistencia.
-- **Ticket 3 (Persistencia & Rollout 100%)**:
-  - Persistir en `localStorage` y API del backend (`/api/user-preferences`).
-  - Aumentar el porcentaje de rollout al 100%.
+1. **Despliegue Continuo de Funcionalidades**:
+   - Todo el código se integra diariamente a la rama `main`.
+   - Módulos en desarrollo se protegen mediante **Feature Flags** antes de exponerse al usuario final.
+
+2. **Gestión de Módulos mediante Flags**:
+   - `online_ordering_enabled`: Permite activar/desactivar la toma de pedidos online sin necesidad de realizar un redeploy.
+   - `table_reservation_enabled`: Habilita o deshabilita la reserva de mesas según capacidad física del local.
+   - `promotions_banner_enabled`: Controla la presencia de campañas publicitarias dinámicas.

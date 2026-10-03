@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: dashboard-darkmode-system
+    name: restaurant-gourmet-app
     env: node
     region: oregon
     plan: free
@@ -10,9 +10,9 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: FEATURE_DARK_MODE_ENABLED
-        value: "false" # Ticket 1 por defecto
-      - key: FEATURE_DARK_MODE_VISIBLE_ROLLOUT
-        value: "10" # Ticket 2 al 10%
-      - key: FEATURE_DARK_MODE_PERSISTENCE
-        value: "true" # Ticket 3 activado
+      - key: FEATURE_ONLINE_ORDERING
+        value: "true"
+      - key: FEATURE_TABLE_RESERVATION
+        value: "true"
+      - key: FEATURE_PROMOTIONS_BANNER
+        value: "true"

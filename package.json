@@ -1,19 +1,21 @@
 {
-  "name": "dashboard-darkmode-system",
+  "name": "restaurant-gourmet-app",
   "version": "1.0.0",
-  "description": "Modo Oscuro (Dark Mode) en un Dashboard con Feature Flags, TBD, CI/CD y Docker (Ejemplo 3 - Taller 5)",
+  "description": "Aplicación Web Real de Restaurante Gourmet con Catálogo de Productos, Carrito de Pedidos, Reservas, Feature Flags, CI/CD y Docker (Taller 5)",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "test": "node --test tests/*.test.js",
-    "lint": "node --check src/server.js src/app.js src/config/featureFlags.js src/db/database.js src/models/preferenceModel.js src/routes/preferenceRoutes.js src/routes/flagRoutes.js tests/theme.test.js tests/featureFlags.test.js"
+    "lint": "node --check src/server.js src/app.js src/config/featureFlags.js src/db/database.js src/routes/menuRoutes.js src/routes/orderRoutes.js src/routes/reservationRoutes.js src/routes/flagRoutes.js tests/restaurant.test.js tests/featureFlags.test.js"
   },
   "keywords": [
+    "restaurant",
+    "gourmet-menu",
+    "online-ordering",
+    "table-reservation",
     "trunk-based-development",
     "feature-flags",
-    "dark-mode",
-    "dashboard",
     "ci-cd",
     "render",
     "docker"

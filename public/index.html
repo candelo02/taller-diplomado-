@@ -1,148 +1,293 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Analítico - Modo Oscuro Feature Flag Demo</title>
+  <title>La Dolce Vita - Ristorante & Gourmet</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+  <!-- Banner de Promociones (Ticket Feature Flag: promotions_banner_enabled) -->
+  <div id="promo-banner" class="promo-banner hidden">
+    <span>✨ <strong>Especial de la Semana:</strong> Disfruta de un 15% de descuento en nuestra selección de vinos toscanos y pastas artesanales.</span>
+  </div>
+
+  <!-- Header / Navbar Principal -->
   <header class="navbar">
-    <div class="container nav-content">
-      <div class="logo">
-        <span class="logo-icon">📊</span>
-        <h1>DevOps Analytics</h1>
+    <div class="container nav-container">
+      <div class="brand">
+        <span class="brand-logo">🍷</span>
+        <div>
+          <h1 class="brand-name">La Dolce Vita</h1>
+          <span class="brand-subtitle">RISTORANTE & GOURMET</span>
+        </div>
       </div>
-      
-      <!-- Componente Botón Toggle Modo Oscuro (Ticket 2 ON / OFF) -->
-      <div class="theme-toggle-container" id="theme-toggle-container">
-        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Cambiar Tema">
-          <span class="icon-sun">☀️ Modo Claro</span>
-          <span class="icon-moon">🌙 Modo Oscuro</span>
+
+      <nav class="nav-links">
+        <a href="#menu-section" class="active">Menú</a>
+        <button id="btn-open-reservation-nav" class="nav-btn">📅 Reservar Mesa</button>
+        <button id="btn-open-cart-nav" class="nav-btn cart-badge-btn">
+          🛒 Pedido <span id="cart-count" class="cart-count">0</span>
         </button>
-      </div>
+      </nav>
     </div>
   </header>
 
-  <main class="container grid-layout">
-    <!-- Panel Lateral de Feature Flags (Control TBD del Taller) -->
-    <aside class="panel feature-panel">
-      <h2>⚙️ Control de Feature Flags</h2>
-      <p class="description">Simula la liberación progresiva del Ejemplo 3 por tickets:</p>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <span class="hero-tag">ALTA COCINA ITALIANA & INTERNACIONAL</span>
+      <h2>Una Experiencia Gastronómica Inolvidable</h2>
+      <p>Ingredientes orgánicos importados, pasiones culinarias y la maestría de nuestros chefs reunidos en cada platillo.</p>
+      <div class="hero-actions">
+        <a href="#menu-section" class="btn btn-gold">Explorar Menú</a>
+        <button id="hero-btn-reserve" class="btn btn-outline">Reservar Mesa</button>
+      </div>
+    </div>
+  </section>
 
-      <div class="flag-control">
-        <label for="toggle-enabled">
-          <strong>Ticket 1: dark_mode_enabled (CSS & Engine)</strong>
-        </label>
-        <div class="toggle-wrapper">
-          <input type="checkbox" id="toggle-enabled">
-          <span class="status-badge" id="badge-enabled">OFF</span>
+  <!-- Main Content Layout (Sidebar de Flags + Menú principal) -->
+  <main class="container main-layout">
+    
+    <!-- Widget de Control de Feature Flags (DevOps Workshop TBD) -->
+    <aside class="panel flags-panel">
+      <div class="flags-header">
+        <h3>⚙️ Control de Módulos (Feature Flags)</h3>
+        <p>Activa/Desactiva componentes en producción:</p>
+      </div>
+
+      <div class="flag-control-item">
+        <div class="flag-row">
+          <strong>Pedidos en Línea & Carrito</strong>
+          <input type="checkbox" id="flag-online-ordering" checked>
         </div>
-        <small>Variables CSS listas pero ocultas/desactivadas.</small>
+        <small>Habilita botones de compra y checkout.</small>
       </div>
 
       <hr>
 
-      <div class="flag-control">
-        <label for="range-visible">
-          <strong>Ticket 2: dark_mode_visible Rollout %</strong>
-        </label>
-        <div class="range-wrapper">
-          <input type="range" id="range-visible" min="0" max="100" step="10" value="10">
-          <span id="label-visible-pct">10%</span>
+      <div class="flag-control-item">
+        <div class="flag-row">
+          <strong>Reserva de Mesas</strong>
+          <input type="checkbox" id="flag-table-reservation" checked>
         </div>
-        <small>Muestra el botón switch de tema al % de usuarios.</small>
+        <small>Habilita el formulario de reservas.</small>
       </div>
 
       <hr>
 
-      <div class="flag-control">
-        <label for="toggle-persistence">
-          <strong>Ticket 3: dark_mode_persistence (Guardar)</strong>
-        </label>
-        <div class="toggle-wrapper">
-          <input type="checkbox" id="toggle-persistence" checked>
-          <span class="status-badge on" id="badge-persistence">ON</span>
+      <div class="flag-control-item">
+        <div class="flag-row">
+          <strong>Banner Promocional</strong>
+          <input type="checkbox" id="flag-promotions-banner" checked>
         </div>
-        <small>Guarda preferencia en localStorage / Backend API.</small>
-      </div>
-
-      <div class="user-sim">
-        <label for="user-id-input">Simular ID de Usuario / IP:</label>
-        <input type="text" id="user-id-input" value="user_123">
-        <button id="btn-apply-user" class="btn btn-secondary">Actualizar Simulación</button>
+        <small>Muestra el banner superior de ofertas.</small>
       </div>
     </aside>
 
-    <!-- Contenido Principal del Dashboard -->
-    <section class="dashboard-content">
-      <div class="welcome-card">
-        <h2>🚀 Panel de Monitoreo de Despliegues</h2>
-        <p>Visualización de métricas en tiempo real con soporte dinámico de temas claro y oscuro.</p>
+    <!-- Sección de Menú y Catálogo -->
+    <section id="menu-section" class="menu-section">
+      <div class="section-header">
+        <h2>Nuestras Especialidades Gourmet</h2>
+        <p>Selecciona una categoría o busca tu platillo favorito:</p>
       </div>
 
-      <!-- Banners Informativos de Estado de Flag -->
-      <div id="banner-ticket1-off" class="banner banner-warning">
-        ⚠️ <strong>Ticket 1:</strong> El soporte de modo oscuro está deshabilitado (`dark_mode_enabled = false`).
-      </div>
-
-      <div id="banner-ticket2-off" class="banner banner-info hidden">
-        🔒 <strong>Ticket 2:</strong> Tu usuario no pertenece al grupo del % de Rollout con acceso al botón de cambio de tema.
-      </div>
-
-      <!-- Tarjetas de Métricas -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-title">Deploys Exitosos</div>
-          <div class="stat-value">124</div>
-          <div class="stat-change positive">+12% vs semana anterior</div>
+      <!-- Filtros por Categoría y Búsqueda -->
+      <div class="menu-toolbar">
+        <div class="categories-bar" id="categories-bar">
+          <button class="cat-btn active" data-cat="Todos">Todos</button>
+          <button class="cat-btn" data-cat="Entradas">Entradas</button>
+          <button class="cat-btn" data-cat="Platos Fuertes">Platos Fuertes</button>
+          <button class="cat-btn" data-cat="Postres">Postres</button>
+          <button class="cat-btn" data-cat="Bebidas">Bebidas</button>
         </div>
 
-        <div class="stat-card">
-          <div class="stat-title">Tiempo Medio de Rollback</div>
-          <div class="stat-value">1.4 min</div>
-          <div class="stat-change positive">-45s optimizado</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-title">Feature Flags Activos</div>
-          <div class="stat-value">8</div>
-          <div class="stat-change neutral">3 en fase de rollout</div>
-        </div>
-
-        <div class="stat-card">
-          <div class="stat-title">Cobertura de CI</div>
-          <div class="stat-value">98.5%</div>
-          <div class="stat-change positive">Pipeline 100% Verde</div>
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="🔍 Buscar plato o ingrediente...">
         </div>
       </div>
 
-      <!-- Gráfico Simulado / Actividad Reciente -->
-      <div class="panel activity-card">
-        <h3>📈 Actividad del Pipeline de CI/CD</h3>
-        <ul class="activity-list">
-          <li>
-            <span class="badge badge-success">PASSED</span>
-            <strong>#104 - Merge a main:</strong> Ticket 3: Persistencia de modo oscuro habilitada.
-            <span class="time">Hace 5 min</span>
-          </li>
-          <li>
-            <span class="badge badge-success">PASSED</span>
-            <strong>#103 - Build Docker:</strong> Imagen `dashboard-darkmode-system` compilada.
-            <span class="time">Hace 18 min</span>
-          </li>
-          <li>
-            <span class="badge badge-success">PASSED</span>
-            <strong>#102 - Render Deploy:</strong> Auto-deploy completado en entorno de producción.
-            <span class="time">Hace 32 min</span>
-          </li>
-        </ul>
+      <!-- Rejilla de Platillos -->
+      <div id="products-grid" class="products-grid">
+        <!-- Renderizado dinámico desde app.js -->
       </div>
     </section>
+
   </main>
 
+  <!-- MODAL DE DETALLE DE PLATILLO -->
+  <div id="detail-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="btn-close-detail">&times;</button>
+      <img id="detail-img" src="" alt="Platillo" class="modal-img">
+      <div class="modal-body">
+        <div class="modal-header-row">
+          <h3 id="detail-title"></h3>
+          <span id="detail-price" class="modal-price"></span>
+        </div>
+        <p id="detail-description" class="modal-desc"></p>
+        <div class="ingredients-box">
+          <strong>Ingredientes principales:</strong>
+          <ul id="detail-ingredients"></ul>
+        </div>
+        <div class="modal-footer">
+          <button id="detail-add-btn" class="btn btn-gold full-width">Agregar al Pedido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CARRITO Y CHECKOUT -->
+  <div id="cart-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card modal-large">
+      <button class="modal-close" id="btn-close-cart">&times;</button>
+      <div class="modal-body">
+        <h3>🛒 Tu Pedido Gourmet</h3>
+        
+        <div id="cart-disabled-banner" class="banner banner-warning hidden">
+          ⚠️ El servicio de pedidos en línea no está disponible actualmente por mantenimiento.
+        </div>
+
+        <div id="cart-items-container" class="cart-items-container">
+          <!-- Items del carrito -->
+        </div>
+
+        <div id="cart-summary" class="cart-summary">
+          <div class="summary-line">
+            <span>Subtotal:</span>
+            <span id="cart-subtotal">$0.00</span>
+          </div>
+          <div class="summary-line">
+            <span>Servicio sugerido (10%):</span>
+            <span id="cart-service">$0.00</span>
+          </div>
+          <div class="summary-line total-line">
+            <span>Total a Pagar:</span>
+            <span id="cart-total">$0.00</span>
+          </div>
+
+          <form id="order-form" class="order-form">
+            <h4>Datos de Entrega / Contacto</h4>
+            <div class="form-row">
+              <input type="text" id="order-name" placeholder="Tu Nombre Completo *" required>
+              <input type="tel" id="order-phone" placeholder="Teléfono de Contacto">
+            </div>
+            <input type="text" id="order-address" placeholder="Dirección de Entrega o Consumo en Mesa (ej: Mesa #4)">
+            <textarea id="order-notes" rows="2" placeholder="Notas especiales (alergias, término de cocción...)"></textarea>
+
+            <button type="submit" id="btn-confirm-order" class="btn btn-gold full-width margin-top">Confirmar y Enviar Pedido</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE RESERVA DE MESAS -->
+  <div id="reservation-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card">
+      <button class="modal-close" id="btn-close-reservation">&times;</button>
+      <div class="modal-body">
+        <h3>📅 Reserva tu Mesa</h3>
+        <p class="modal-subtitle">Garantiza tu lugar para una velada gastronómica exclusiva.</p>
+
+        <div id="reservation-disabled-banner" class="banner banner-warning hidden">
+          ⚠️ Las reservas en línea están temporalmente deshabilitadas.
+        </div>
+
+        <form id="reservation-form" class="reservation-form">
+          <div class="form-group">
+            <label for="res-name">Nombre Completo *</label>
+            <input type="text" id="res-name" placeholder="Ej: Valentina Rossi" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-email">Correo Electrónico</label>
+              <input type="email" id="res-email" placeholder="correo@ejemplo.com">
+            </div>
+            <div class="form-group">
+              <label for="res-phone">Teléfono *</label>
+              <input type="tel" id="res-phone" placeholder="+57 300 123 4567" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-date">Fecha *</label>
+              <input type="date" id="res-date" required>
+            </div>
+            <div class="form-group">
+              <label for="res-time">Hora *</label>
+              <select id="res-time" required>
+                <option value="12:30">12:30 PM</option>
+                <option value="13:30">01:30 PM</option>
+                <option value="14:30">02:30 PM</option>
+                <option value="19:00">07:00 PM</option>
+                <option value="20:00">08:00 PM</option>
+                <option value="21:00">09:00 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="res-guests">Comensales *</label>
+              <select id="res-guests" required>
+                <option value="2">2 Personas</option>
+                <option value="4" selected>4 Personas</option>
+                <option value="6">6 Personas</option>
+                <option value="8">8+ Personas</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="res-requests">Solicitudes Especiales</label>
+            <textarea id="res-requests" rows="2" placeholder="Ej: Mesa en terraza, celebración de aniversario..."></textarea>
+          </div>
+
+          <button type="submit" id="btn-submit-reservation" class="btn btn-gold full-width">Confirmar Reserva</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE CONFIRMACIÓN -->
+  <div id="confirmation-modal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-card text-center">
+      <div class="success-icon">🎉</div>
+      <h3 id="conf-title">¡Operación Exitosa!</h3>
+      <p id="conf-message" class="conf-message"></p>
+      <div id="conf-details" class="conf-details"></div>
+      <button id="btn-close-conf" class="btn btn-gold margin-top">Aceptar</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
   <footer class="footer">
-    <p>Ejemplo 3: Modo Oscuro (Dark Mode) en Dashboard | Pipeline Status: <span class="badge badge-success">CI GREEN</span></p>
+    <div class="container footer-content">
+      <div>
+        <h4>La Dolce Vita</h4>
+        <p>📍 Av. Gourmet #45-12, Zona Rosa</p>
+        <p>📞 +57 (601) 555-GOURMET</p>
+      </div>
+      <div>
+        <h4>Horario de Atención</h4>
+        <p>Lunes a Sábado: 12:00 PM - 11:00 PM</p>
+        <p>Domingos: 12:00 PM - 09:00 PM</p>
+      </div>
+      <div>
+        <h4>Pipeline Status</h4>
+        <p><span class="badge badge-success">CI GREEN 100%</span></p>
+        <p><small>Trunk-Based Development & Feature Flags</small></p>
+      </div>
+    </div>
   </footer>
 
   <script src="app.js"></script>

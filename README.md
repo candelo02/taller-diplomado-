@@ -1,24 +1,32 @@
-# 📊 Dashboard con Modo Oscuro (Dark Mode) - Ejemplo 3 (Taller 5)
+# 🍷 Aplicación Web Real: Restaurante Gourmet "La Dolce Vita" (Taller 5)
 
-Solución completa para el **Ejemplo 3: Modo oscuro (Dark Mode) en un Dashboard**, desarrollado aplicando **Trunk-Based Development (TBD)**, **Feature Toggles**, Node.js / Express, pruebas automatizadas en CI/CD (GitHub Actions), Docker y auto-despliegue en Render.
-
----
-
-## 📋 Resumen de Tickets e Historias
-
-| Ticket | Descripción | Feature Flag | Estado |
-| :--- | :--- | :--- | :--- |
-| **Ticket 1** | Definir variables CSS y motor de temas (`[data-theme="dark"]`) | `dark_mode_enabled` | `false` por defecto |
-| **Ticket 2** | Botón switch de tema en navbar para el 10% de usuarios | `dark_mode_visible_percentage` | `10%` rollout |
-| **Ticket 3** | Persistencia de preferencia (localStorage + Backend API) | `dark_mode_persistence_enabled` | `100%` rollout |
+Aplicación web completa y real para el restaurante gourmet **"La Dolce Vita"**, con flujo interactivo de menú, catálogo de productos por categorías, carrito de pedidos en línea, reservas de mesa, panel de control de **Feature Flags** (Trunk-Based Development), contenedorización con Docker y despliegue continuo en Render.
 
 ---
 
-## ⚡ Comandos Rápidos
+## 🍽️ Características Principales
+
+- **Menú Interactivo Gourmet**: Platillos organizados por categorías (*Entradas, Platos Fuertes, Postres, Bebidas*), con precios, calificaciones, insignias (*Vegetariano, Especial del Chef, Recomendado*) y buscador en tiempo real.
+- **Carrito de Pedidos**: Selección de productos, ajuste de cantidades, cálculo automático de subtotal, servicio sugerido (10%) y confirmación con código de orden (`ORD-xxxx`).
+- **Reserva de Mesas**: Formulario dinámico por fecha, hora y número de comensales con comprobante instantáneo (`RES-xxxx`).
+- **Panel de Feature Flags (DevOps Workshop)**: Control dinámico para activar/desactivar el carrito de compra, el módulo de reservas o el banner promocional en tiempo real.
+
+---
+
+## ⚡ Comandos de Ejecución
 
 ```bash
 npm install     # Instalar dependencias
-npm test        # Ejecutar suite de pruebas (12 tests)
-npm run lint    # Chequeo sintáctico de código
-npm start       # Iniciar servidor en http://localhost:3000
+npm test        # Ejecutar suite de 14 pruebas unitarias e integración
+npm run lint    # Chequeo sintáctico de todo el código
+npm start       # Iniciar servidor web en http://localhost:3000
+```
+
+---
+
+## 🐳 Ejecución con Docker
+
+```bash
+docker build -t restaurant-gourmet-app .
+docker run -d -p 3000:3000 --name restaurant-app restaurant-gourmet-app
 ```
