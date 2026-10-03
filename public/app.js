@@ -3,8 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let fullMenu = [];
   let cartItems = []; // [{ id, name, price, quantity }]
   let activeCategory = 'Todos';
+  let currentTheme = localStorage.getItem('restaurant_theme') || 'dark';
+
+  // Aplicar tema guardado al cargar
+  applyTheme(currentTheme);
 
   // Elementos DOM principales
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const promoBanner = document.getElementById('promo-banner');
   const productsGrid = document.getElementById('products-grid');
   const categoriesBar = document.getElementById('categories-bar');
@@ -52,6 +57,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const confTitle = document.getElementById('conf-title');
   const confMessage = document.getElementById('conf-message');
   const confDetails = document.getElementById('conf-details');
+
+  // --- EVENT LISTENER MODO CLARO / MODO OSCURO (Esquina Superior Derecha) ---
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(currentTheme);
+      localStorage.setItem('restaurant_theme', currentTheme);
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
 
   // Cargar Datos Iniciales
   loadFeatureFlags();
