@@ -19,16 +19,17 @@ test('API Integration Tests - Restaurante Gourmet "La Dolce Vita"', async (t) =>
     assert.equal(res.body.status, 'OK');
   });
 
-  await t.test('GET /api/menu - Debe retornar lista completa del catálogo de platos', async () => {
+  await t.test('GET /api/menu - Debe retornar lista completa de 28 platos', async () => {
     const res = await request(app).get('/api/menu');
     assert.equal(res.status, 200);
     assert.ok(Array.isArray(res.body));
-    assert.ok(res.body.length >= 10);
+    assert.equal(res.body.length, 28);
   });
 
-  await t.test('GET /api/menu?category=Entradas - Debe filtrar por categoría Entradas', async () => {
+  await t.test('GET /api/menu?category=Entradas - Debe retornar 7 platos en la categoría Entradas', async () => {
     const res = await request(app).get('/api/menu?category=Entradas');
     assert.equal(res.status, 200);
+    assert.equal(res.body.length, 7);
     assert.ok(res.body.every(item => item.category === 'Entradas'));
   });
 
@@ -54,16 +55,16 @@ test('API Integration Tests - Restaurante Gourmet "La Dolce Vita"', async (t) =>
         phone: '3001234567',
         address: 'Calle 100 #15-20',
         items: [
-          { id: 1, quantity: 2 }, // Bruschetta $14.50 * 2 = 29.00
-          { id: 7, quantity: 1 }  // Tiramisú $9.50 * 1 = 9.50
+          { id: 1, quantity: 2 },  // Bruschetta $12.50 * 2 = 25.00
+          { id: 15, quantity: 1 }  // Tiramisú $9.50 * 1 = 9.50
         ]
       });
 
     assert.equal(res.status, 201);
     assert.equal(res.body.order.customerName, 'Juan Pérez');
-    assert.equal(res.body.order.subtotal, 38.50);
-    assert.equal(res.body.order.serviceFee, 3.85);
-    assert.equal(res.body.order.total, 42.35);
+    assert.equal(res.body.order.subtotal, 34.50);
+    assert.equal(res.body.order.serviceFee, 3.45);
+    assert.equal(res.body.order.total, 37.95);
     assert.ok(res.body.order.orderId.startsWith('ORD-'));
   });
 
