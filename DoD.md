@@ -1,29 +1,30 @@
-# 📋 Definition of Done (DoD) Final - Restaurante Gourmet "La Dolce Vita"
+# 📋 Definition of Done (DoD) Final — Taller 1, 2 y 5
 
-Este documento formaliza los criterios de aceptación acordados para la aplicación real del **Restaurante Gourmet "La Dolce Vita"**.
+Este documento formaliza los criterios de aceptación acordados para dar por finalizada cualquier Historia de Usuario o Incremento en el proyecto **Restaurante Gourmet "La Dolce Vita"**.
 
 ---
 
 ## 🛠️ 1. DoD Técnico (Engineering & Quality)
-- [x] **Código Revisado**: Flujos de catálogo, carrito de compras, reservas de mesa y motor de Feature Flags auditados.
-- [x] **CI Verde**: Pipeline en GitHub Actions pasando al 100%:
-  - Linter y chequeo sintáctico (`npm run lint`).
-  - Pruebas unitarias e integración (`npm test`).
-- [x] **Feature Toggles Configurados**:
-  - `online_ordering_enabled` (Carrito y pedidos)
-  - `table_reservation_enabled` (Reserva de mesas)
-  - `promotions_banner_enabled` (Banner de ofertas)
-- [x] **Docker Image Build**: Compilación verificada del contenedor Docker multi-stage.
+- [x] **Cumplimiento de DoR**: La historia cumplió previamente con la Definition of Ready ([DoR.md](DoR.md)).
+- [x] **Código Revisado**: Revisión de código en Pair/Mob Programming o mediante PR con aprobación.
+- [x] **CI Verde**: Pipeline de GitHub Actions súper confiable pasando al 100%:
+  - Tests unitarios e integración ejecutados sin fallos (`npm test`).
+  - Análisis estático / Linter comprobado (`npm run lint`).
+- [x] **Feature Toggle Configurado**: Funcionalidades protegidas mediante banderas de características (`online_ordering_enabled`, `table_reservation_enabled`, `promotions_banner_enabled`).
+- [x] **Sin Regresiones**: Comprobado que los cambios no rompen ninguna funcionalidad existente.
+- [x] **Docker Image Build**: Verificado que la imagen Docker del contenedor se construye limpiamente con `HEALTHCHECK` activo en `/healthz`.
 
 ---
 
 ## 🎯 2. DoD de Negocio (Product & Acceptance Criteria)
-- [x] **Catálogo Interactivo**: Filtrado por categoría (*Entradas, Platos Fuertes, Postres, Bebidas*) y búsqueda por ingredientes en tiempo real.
-- [x] **Pedidos & Reservas**: Cálculo automático de subtotales, propina/servicio (10%) y confirmación con código único de pedido o reserva.
-- [x] **Respuesta Adaptativa**: Experiencia de usuario responsive optimizada para dispositivos móviles y de escritorio.
+- [x] **Criterios de Aceptación Cumplidos**: Todos los escenarios de usuario (menú, pedidos, reservas) han sido validados.
+- [x] **Validación en Entorno Destino**: La funcionalidad se puede probar y verificar en el entorno de Staging o Producción.
+- [x] **Alineación con PO**: El Product Owner conoce el estado exacto de las funciones y Feature Toggles.
 
 ---
 
 ## 🚀 3. DoD de Despliegue (Ops & Monitoring)
-- [x] **Auto-deploy a Render**: Automatización mediante webhook desde `main`.
-- [x] **Health Check Pasando**: Respondiendo `200 OK` en `/healthz`.
+- [x] **Auto-deploy a Render**: Código integrado en `main` desplegado automáticamente a Render mediante el pipeline.
+- [x] **Health Check Pasando**: El endpoint de salud `/healthz` responde con estado `200 OK`.
+- [x] **Monitoreo & Logs**: Verificación básica de logs de ejecución en Render sin errores en arranque.
+- [x] **Toggle en Estado Acordado**: Módulos activos y operables para los usuarios finales.
