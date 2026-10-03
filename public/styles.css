@@ -1,0 +1,330 @@
+/* Ticket 1: Variables CSS de Tema (Claro vs Oscuro) */
+:root, [data-theme="light"] {
+  --bg-color: #f1f5f9;
+  --nav-bg: #ffffff;
+  --panel-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --primary-color: #2563eb;
+  --primary-hover: #1d4ed8;
+  --stat-bg: #f8fafc;
+  --banner-info-bg: #eff6ff;
+  --banner-info-border: #bfdbfe;
+  --banner-warning-bg: #fffbeb;
+  --banner-warning-border: #fde68a;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  --bg-color: #0f172a;
+  --nav-bg: #1e293b;
+  --panel-bg: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #334155;
+  --primary-color: #3b82f6;
+  --primary-hover: #60a5fa;
+  --stat-bg: #0f172a;
+  --banner-info-bg: #172554;
+  --banner-info-border: #1e40af;
+  --banner-warning-bg: #451a03;
+  --banner-warning-border: #78350f;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.navbar {
+  background: var(--nav-bg);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo h1 {
+  font-size: 1.3rem;
+}
+
+.theme-toggle-btn {
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--primary-color);
+}
+
+[data-theme="light"] .icon-moon { display: inline; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="dark"] .icon-sun { display: inline; }
+[data-theme="dark"] .icon-moon { display: none; }
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.feature-panel {
+  height: fit-content;
+}
+
+.feature-panel h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+
+.description {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.flag-control {
+  margin: 1rem 0;
+}
+
+.flag-control label {
+  display: block;
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+}
+
+.flag-control small {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.toggle-wrapper, .range-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-weight: bold;
+  background: #cbd5e1;
+  color: #475569;
+}
+
+.status-badge.on {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.user-sim {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.user-sim label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.3rem;
+}
+
+.user-sim input {
+  width: 100%;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-main);
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  background: var(--primary-color);
+  color: white;
+  width: 100%;
+}
+
+.welcome-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.welcome-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.welcome-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.banner {
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+}
+
+.banner-info {
+  background: var(--banner-info-bg);
+  border: 1px solid var(--banner-info-border);
+}
+
+.banner-warning {
+  background: var(--banner-warning-bg);
+  border: 1px solid var(--banner-warning-border);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+}
+
+.stat-title {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+}
+
+.stat-change {
+  font-size: 0.78rem;
+}
+
+.stat-change.positive { color: #16a34a; }
+.stat-change.neutral { color: var(--text-muted); }
+
+.activity-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.activity-list {
+  list-style: none;
+}
+
+.activity-list li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.activity-list li:last-child {
+  border-bottom: none;
+}
+
+.activity-list .time {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.badge {
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

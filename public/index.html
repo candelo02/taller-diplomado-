@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analítico - Modo Oscuro Feature Flag Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-content">
+      <div class="logo">
+        <span class="logo-icon">📊</span>
+        <h1>DevOps Analytics</h1>
+      </div>
+      
+      <!-- Componente Botón Toggle Modo Oscuro (Ticket 2 ON / OFF) -->
+      <div class="theme-toggle-container" id="theme-toggle-container">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Cambiar Tema">
+          <span class="icon-sun">☀️ Modo Claro</span>
+          <span class="icon-moon">🌙 Modo Oscuro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container grid-layout">
+    <!-- Panel Lateral de Feature Flags (Control TBD del Taller) -->
+    <aside class="panel feature-panel">
+      <h2>⚙️ Control de Feature Flags</h2>
+      <p class="description">Simula la liberación progresiva del Ejemplo 3 por tickets:</p>
+
+      <div class="flag-control">
+        <label for="toggle-enabled">
+          <strong>Ticket 1: dark_mode_enabled (CSS & Engine)</strong>
+        </label>
+        <div class="toggle-wrapper">
+          <input type="checkbox" id="toggle-enabled">
+          <span class="status-badge" id="badge-enabled">OFF</span>
+        </div>
+        <small>Variables CSS listas pero ocultas/desactivadas.</small>
+      </div>
+
+      <hr>
+
+      <div class="flag-control">
+        <label for="range-visible">
+          <strong>Ticket 2: dark_mode_visible Rollout %</strong>
+        </label>
+        <div class="range-wrapper">
+          <input type="range" id="range-visible" min="0" max="100" step="10" value="10">
+          <span id="label-visible-pct">10%</span>
+        </div>
+        <small>Muestra el botón switch de tema al % de usuarios.</small>
+      </div>
+
+      <hr>
+
+      <div class="flag-control">
+        <label for="toggle-persistence">
+          <strong>Ticket 3: dark_mode_persistence (Guardar)</strong>
+        </label>
+        <div class="toggle-wrapper">
+          <input type="checkbox" id="toggle-persistence" checked>
+          <span class="status-badge on" id="badge-persistence">ON</span>
+        </div>
+        <small>Guarda preferencia en localStorage / Backend API.</small>
+      </div>
+
+      <div class="user-sim">
+        <label for="user-id-input">Simular ID de Usuario / IP:</label>
+        <input type="text" id="user-id-input" value="user_123">
+        <button id="btn-apply-user" class="btn btn-secondary">Actualizar Simulación</button>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal del Dashboard -->
+    <section class="dashboard-content">
+      <div class="welcome-card">
+        <h2>🚀 Panel de Monitoreo de Despliegues</h2>
+        <p>Visualización de métricas en tiempo real con soporte dinámico de temas claro y oscuro.</p>
+      </div>
+
+      <!-- Banners Informativos de Estado de Flag -->
+      <div id="banner-ticket1-off" class="banner banner-warning">
+        ⚠️ <strong>Ticket 1:</strong> El soporte de modo oscuro está deshabilitado (`dark_mode_enabled = false`).
+      </div>
+
+      <div id="banner-ticket2-off" class="banner banner-info hidden">
+        🔒 <strong>Ticket 2:</strong> Tu usuario no pertenece al grupo del % de Rollout con acceso al botón de cambio de tema.
+      </div>
+
+      <!-- Tarjetas de Métricas -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-title">Deploys Exitosos</div>
+          <div class="stat-value">124</div>
+          <div class="stat-change positive">+12% vs semana anterior</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-title">Tiempo Medio de Rollback</div>
+          <div class="stat-value">1.4 min</div>
+          <div class="stat-change positive">-45s optimizado</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-title">Feature Flags Activos</div>
+          <div class="stat-value">8</div>
+          <div class="stat-change neutral">3 en fase de rollout</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-title">Cobertura de CI</div>
+          <div class="stat-value">98.5%</div>
+          <div class="stat-change positive">Pipeline 100% Verde</div>
+        </div>
+      </div>
+
+      <!-- Gráfico Simulado / Actividad Reciente -->
+      <div class="panel activity-card">
+        <h3>📈 Actividad del Pipeline de CI/CD</h3>
+        <ul class="activity-list">
+          <li>
+            <span class="badge badge-success">PASSED</span>
+            <strong>#104 - Merge a main:</strong> Ticket 3: Persistencia de modo oscuro habilitada.
+            <span class="time">Hace 5 min</span>
+          </li>
+          <li>
+            <span class="badge badge-success">PASSED</span>
+            <strong>#103 - Build Docker:</strong> Imagen `dashboard-darkmode-system` compilada.
+            <span class="time">Hace 18 min</span>
+          </li>
+          <li>
+            <span class="badge badge-success">PASSED</span>
+            <strong>#102 - Render Deploy:</strong> Auto-deploy completado en entorno de producción.
+            <span class="time">Hace 32 min</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Ejemplo 3: Modo Oscuro (Dark Mode) en Dashboard | Pipeline Status: <span class="badge badge-success">CI GREEN</span></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
