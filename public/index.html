@@ -11,8 +11,8 @@
 </head>
 <body>
 
-  <!-- Banner de Promociones (Ticket Feature Flag: promotions_banner_enabled) -->
-  <div id="promo-banner" class="promo-banner hidden">
+  <!-- Banner de Promociones Especiales (Siempre Activo) -->
+  <div id="promo-banner" class="promo-banner">
     <span>✨ <strong>Especial de la Semana:</strong> Disfruta de un 15% de descuento en nuestra selección de vinos toscanos y pastas artesanales.</span>
   </div>
 
@@ -33,7 +33,7 @@
         <button id="btn-open-cart-nav" class="nav-btn cart-badge-btn">
           🛒 Pedido <span id="cart-count" class="cart-count">0</span>
         </button>
-        <!-- Icono/Botón de Alternancia Modo Claro / Modo Oscuro en la esquina superior derecha -->
+        <!-- Icono/Botón de Alternancia Modo Claro / Modo Oscuro (Esquina Superior Derecha) -->
         <button id="theme-toggle-btn" class="nav-btn theme-toggle-btn" title="Cambiar a Modo Claro / Oscuro" aria-label="Cambiar Tema">
           <span class="icon-sun">☀️</span>
           <span class="icon-moon">🌙</span>
@@ -56,47 +56,11 @@
     </div>
   </section>
 
-  <!-- Main Content Layout (Sidebar de Flags + Menú principal) -->
+  <!-- Main Content Layout (Menú Principal a Ancho Completo) -->
   <main class="container main-layout">
     
-    <!-- Widget de Control de Feature Flags (DevOps Workshop TBD) -->
-    <aside class="panel flags-panel">
-      <div class="flags-header">
-        <h3>⚙️ Control de Módulos (Feature Flags)</h3>
-        <p>Activa/Desactiva componentes en producción:</p>
-      </div>
-
-      <div class="flag-control-item">
-        <div class="flag-row">
-          <strong>Pedidos en Línea & Carrito</strong>
-          <input type="checkbox" id="flag-online-ordering" checked>
-        </div>
-        <small>Habilita botones de compra y checkout.</small>
-      </div>
-
-      <hr>
-
-      <div class="flag-control-item">
-        <div class="flag-row">
-          <strong>Reserva de Mesas</strong>
-          <input type="checkbox" id="flag-table-reservation" checked>
-        </div>
-        <small>Habilita el formulario de reservas.</small>
-      </div>
-
-      <hr>
-
-      <div class="flag-control-item">
-        <div class="flag-row">
-          <strong>Banner Promocional</strong>
-          <input type="checkbox" id="flag-promotions-banner" checked>
-        </div>
-        <small>Muestra el banner superior de ofertas.</small>
-      </div>
-    </aside>
-
     <!-- Sección de Menú y Catálogo -->
-    <section id="menu-section" class="menu-section">
+    <section id="menu-section" class="menu-section full-width">
       <div class="section-header">
         <h2>Nuestras Especialidades Gourmet</h2>
         <p>Selecciona una categoría o busca tu platillo favorito:</p>
@@ -156,10 +120,6 @@
       <div class="modal-body">
         <h3>🛒 Tu Pedido Gourmet</h3>
         
-        <div id="cart-disabled-banner" class="banner banner-warning hidden">
-          ⚠️ El servicio de pedidos en línea no está disponible actualmente por mantenimiento.
-        </div>
-
         <div id="cart-items-container" class="cart-items-container">
           <!-- Items del carrito -->
         </div>
@@ -202,10 +162,6 @@
       <div class="modal-body">
         <h3>📅 Reserva tu Mesa</h3>
         <p class="modal-subtitle">Garantiza tu lugar para una velada gastronómica exclusiva.</p>
-
-        <div id="reservation-disabled-banner" class="banner banner-warning hidden">
-          ⚠️ Las reservas en línea están temporalmente deshabilitadas.
-        </div>
 
         <form id="reservation-form" class="reservation-form">
           <div class="form-group">
@@ -290,7 +246,7 @@
       <div>
         <h4>Pipeline Status</h4>
         <p><span class="badge badge-success">CI GREEN 100%</span></p>
-        <p><small>Trunk-Based Development & Feature Flags</small></p>
+        <p><small>Trunk-Based Development & Continuous Delivery</small></p>
       </div>
     </div>
   </footer>

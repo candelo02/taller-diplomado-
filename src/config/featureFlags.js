@@ -1,15 +1,11 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+// Módulos siempre activos por defecto
 const defaultFlags = {
-  // Flag 1: Pedidos en Línea y Carrito de Compras
-  online_ordering_enabled: process.env.FEATURE_ONLINE_ORDERING === 'false' ? false : true,
-
-  // Flag 2: Módulo de Reserva de Mesas
-  table_reservation_enabled: process.env.FEATURE_TABLE_RESERVATION === 'false' ? false : true,
-
-  // Flag 3: Banner de Promociones y Recomendados del Chef
-  promotions_banner_enabled: process.env.FEATURE_PROMOTIONS_BANNER === 'false' ? false : true
+  online_ordering_enabled: true,
+  table_reservation_enabled: true,
+  promotions_banner_enabled: true
 };
 
 class FeatureFlagService {

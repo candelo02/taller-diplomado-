@@ -25,7 +25,7 @@
   --card-border: #e3e0d6;   /* Bordes arena suave */
   --gold-primary: #b87326;  /* Dorado ámbar gastronómico mate de baja saturación */
   --gold-hover: #9e601c;
-  --text-main: #2c2925;     /* Carbón atenuado (evita el negro puro #000 para no cansar la vista) */
+  --text-main: #2c2925;     /* Carbón atenuado */
   --text-muted: #6b675e;    /* Texto secundario cálido y legible */
   --danger-color: #c93b3b;
   --success-color: #1e8048;
@@ -267,19 +267,11 @@ body {
   color: #121418;
 }
 
-/* Main Layout */
+/* Main Layout (Ancho completo) */
 .main-layout {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 2rem;
+  display: block;
   padding-top: 3rem;
   padding-bottom: 3rem;
-}
-
-@media (max-width: 900px) {
-  .main-layout {
-    grid-template-columns: 1fr;
-  }
 }
 
 .panel {
@@ -288,41 +280,6 @@ body {
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-}
-
-.flags-panel {
-  height: fit-content;
-}
-
-.flags-header h3 {
-  font-family: var(--font-heading);
-  color: var(--gold-primary);
-  font-size: 1.1rem;
-  margin-bottom: 0.3rem;
-}
-
-.flags-header p {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  margin-bottom: 1rem;
-}
-
-.flag-control-item {
-  margin: 0.85rem 0;
-}
-
-.flag-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.flag-control-item small {
-  display: block;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 0.2rem;
 }
 
 /* Toolbar & Categories */
@@ -680,18 +637,6 @@ input:focus, select:focus, textarea:focus {
   border-radius: 6px;
   font-size: 0.88rem;
   margin-bottom: 1rem;
-}
-
-.banner-warning {
-  background: #fffbe6;
-  border: 1px solid #ffe58f;
-  color: #d48806;
-}
-
-[data-theme="dark"] .banner-warning {
-  background: #451a03;
-  border: 1px solid #78350f;
-  color: #fde68a;
 }
 
 .full-width {

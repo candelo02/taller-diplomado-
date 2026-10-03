@@ -21,11 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnOpenReservationNav = document.getElementById('btn-open-reservation-nav');
   const heroBtnReserve = document.getElementById('hero-btn-reserve');
 
-  // Feature Flag Controls
-  const flagOnlineOrdering = document.getElementById('flag-online-ordering');
-  const flagTableReservation = document.getElementById('flag-table-reservation');
-  const flagPromotionsBanner = document.getElementById('flag-promotions-banner');
-
   // Modals & Backdrops
   const detailModal = document.getElementById('detail-modal');
   const cartModal = document.getElementById('cart-modal');
@@ -42,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedDetailId = null;
 
   // Cart Modal Elements
-  const cartDisabledBanner = document.getElementById('cart-disabled-banner');
   const cartItemsContainer = document.getElementById('cart-items-container');
   const cartSubtotal = document.getElementById('cart-subtotal');
   const cartService = document.getElementById('cart-service');
@@ -50,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const orderForm = document.getElementById('order-form');
 
   // Reservation Modal Elements
-  const reservationDisabledBanner = document.getElementById('reservation-disabled-banner');
   const reservationForm = document.getElementById('reservation-form');
 
   // Confirmation Elements
@@ -58,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const confMessage = document.getElementById('conf-message');
   const confDetails = document.getElementById('conf-details');
 
-  // --- EVENT LISTENER MODO CLARO / MODO OSCURO (Esquina Superior Derecha) ---
+  // --- EVENT LISTENER MODO CLARO / MODO OSCURO ---
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -72,24 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Cargar Datos Iniciales
-  loadFeatureFlags();
   fetchMenu();
-
-  // --- EVENT LISTENERS FLAGS ---
-  flagOnlineOrdering.addEventListener('change', async () => {
-    await updateFlagOnServer('online_ordering_enabled', flagOnlineOrdering.checked);
-    loadFeatureFlags();
-  });
-
-  flagTableReservation.addEventListener('change', async () => {
-    await updateFlagOnServer('table_reservation_enabled', flagTableReservation.checked);
-    loadFeatureFlags();
-  });
-
-  flagPromotionsBanner.addEventListener('change', async () => {
-    await updateFlagOnServer('promotions_banner_enabled', flagPromotionsBanner.checked);
-    loadFeatureFlags();
-  });
 
   // --- EVENT LISTENERS NAVEGACIÓN Y BÚSQUEDA ---
   categoriesBar.addEventListener('click', (e) => {
@@ -296,11 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function addToCart(productId) {
-    if (!flagOnlineOrdering.checked) {
-      alert('El servicio de pedidos en línea no está habilitado actualmente.');
-      return;
-    }
-
     const menuItem = fullMenu.find(m => m.id === productId);
     if (!menuItem) return;
 
@@ -381,57 +352,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateCartBadge();
     renderCart();
-  }
-
-  async function loadFeatureFlags() {
-    try {
-      const res = await fetch('/api/feature-flags');
-      const data = await res.json();
-      const raw = data.raw_flags;
-
-      flagOnlineOrdering.checked = raw.online_ordering_enabled;
-      flagTableReservation.checked = raw.table_reservation_enabled;
-      flagPromotionsBanner.checked = raw.promotions_banner_enabled;
-
-      // Banner Promociones
-      if (raw.promotions_banner_enabled) {
-        promoBanner.classList.remove('hidden');
-      } else {
-        promoBanner.classList.add('hidden');
-      }
-
-      // Pedidos en línea UI
-      if (raw.online_ordering_enabled) {
-        cartDisabledBanner.classList.add('hidden');
-        document.getElementById('btn-confirm-order').removeAttribute('disabled');
-      } else {
-        cartDisabledBanner.classList.remove('hidden');
-        document.getElementById('btn-confirm-order').setAttribute('disabled', 'true');
-      }
-
-      // Reserva de Mesas UI
-      if (raw.table_reservation_enabled) {
-        reservationDisabledBanner.classList.add('hidden');
-        document.getElementById('btn-submit-reservation').removeAttribute('disabled');
-      } else {
-        reservationDisabledBanner.classList.remove('hidden');
-        document.getElementById('btn-submit-reservation').setAttribute('disabled', 'true');
-      }
-    } catch (err) {
-      console.error('Error cargando flags:', err);
-    }
-  }
-
-  async function updateFlagOnServer(flag, value) {
-    try {
-      await fetch('/api/feature-flags', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ flag, value })
-      });
-    } catch (err) {
-      console.error('Error actualizando flag en servidor:', err);
-    }
   }
 
   function openModal(modal) {
